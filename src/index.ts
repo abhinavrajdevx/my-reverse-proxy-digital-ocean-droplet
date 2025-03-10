@@ -24,6 +24,12 @@ const backend = {
 
 app.use(cors());
 
+app.get("/test", (req: any, res: any) => {
+  res.json({
+    message: "OK",
+  });
+});
+
 // Match all routes under /imagine-aix
 app.all("/imagine-aix/*", function (req: any, res: any) {
   try {
