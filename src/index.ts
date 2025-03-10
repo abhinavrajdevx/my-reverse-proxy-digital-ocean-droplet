@@ -31,10 +31,20 @@ app.get("/test", (req: any, res: any) => {
 });
 
 // Match all routes under /imagine-aix
-app.all("/*", function (req: any, res: any) {
+app.all("/imagine-aix/*", function (req: any, res: any) {
   try {
     console.log("Control reached...");
     apiProxy.web(req, res, { target: "http://localhost:3001" });
+  } catch (e) {
+    console.error("Proxy error:", e);
+    res.status(500).send("Proxy error occurred");
+  }
+});
+
+app.all("/ai-web-scrapper/*", function (req: any, res: any) {
+  try {
+    console.log("Control reached...");
+    apiProxy.web(req, res, { target: "http://localhost:3002" });
   } catch (e) {
     console.error("Proxy error:", e);
     res.status(500).send("Proxy error occurred");
