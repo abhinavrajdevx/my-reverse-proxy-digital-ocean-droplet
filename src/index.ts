@@ -19,7 +19,7 @@ if (!PORT) {
 const app = express();
 const apiProxy = httpProxy.createProxyServer();
 const backend = {
-  "imagine-aix": "http://localhost:3001",
+  "imagine-aix": "http://127.0.0.1:3001",
 };
 
 app.use(cors());
