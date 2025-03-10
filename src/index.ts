@@ -25,7 +25,7 @@ const backend = {
 app.use(cors());
 
 // Match all routes under /imagine-aix
-app.all("/imagine-aix*", function (req: any, res: any) {
+app.all("/imagine-aix/*", function (req: any, res: any) {
   try {
     console.log("Control reached...");
     apiProxy.web(req, res, { target: backend["imagine-aix"] });
