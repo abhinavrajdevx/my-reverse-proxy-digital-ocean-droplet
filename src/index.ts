@@ -18,9 +18,6 @@ if (!PORT) {
 
 const app = express();
 const apiProxy = httpProxy.createProxyServer();
-const backend = {
-  "imagine-aix": "http://127.0.0.1:3001",
-};
 
 app.use(cors());
 
@@ -45,6 +42,16 @@ app.all("/ai-web-scrapper/*", function (req: any, res: any) {
   try {
     console.log("Control reached...");
     apiProxy.web(req, res, { target: "http://localhost:3002" });
+  } catch (e) {
+    console.error("Proxy error:", e);
+    res.status(500).send("Proxy error occurred");
+  }
+});
+
+app.all("/user-dashboard/*", function (req: any, res: any) {
+  try {
+    console.log("Control reached...");
+    apiProxy.web(req, res, { target: "http://localhost:3003" });
   } catch (e) {
     console.error("Proxy error:", e);
     res.status(500).send("Proxy error occurred");
