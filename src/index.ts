@@ -58,6 +58,16 @@ app.all("/user-dashboard/*", function (req: any, res: any) {
   }
 });
 
+app.all("/veridian/*", function (req: any, res: any) {
+  try {
+    console.log("Control reached...");
+    apiProxy.web(req, res, { target: "http://localhost:3004" });
+  } catch (e) {
+    console.error("Proxy error:", e);
+    res.status(500).send("Proxy error occurred");
+  }
+});
+
 const server = http.createServer(app);
 
 server.listen(PORT, () => console.log(`App running on ${PORT}`));
